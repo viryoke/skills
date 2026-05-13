@@ -17,7 +17,7 @@
 
 | 文件 | 路径 | 说明 |
 |------|------|------|
-| Shell | `~/.zshrc` | PATH、别名、Starship、Zoxide、Conda、FZF |
+| Shell | `~/.zshrc` | PATH、别名、Starship、Zoxide、FZF |
 | Starship | `~/.config/starship.toml` | Dracula 主题 |
 | Ghostty | `~/.config/ghostty/config` | Dracula + 14pt + opacity=0.92 + blur |
 | Zellij | `~/.config/zellij/config.kdl` | Dracula + 透明背景 |
@@ -36,9 +36,12 @@
 ## ~/.zshrc
 
 ```bash
-# === Homebrew PATH（兼容全平台）===
-eval "$(brew shellenv)"
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+# === PATH（兼容 macOS/Linux）===
+# macOS Homebrew
+if command -v brew &>/dev/null; then
+  eval "$(brew shellenv)"
+fi
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.bun/bin:$PATH"
 
 # === Shell 工具 ===
 eval "$(starship init zsh)"
@@ -135,15 +138,13 @@ pane_frames {
 
 **路径：**
 - macOS: `~/Library/Application Support/Code/User/settings.json`
-- Linux/WSL2: `~/.config/Code/User/settings.json`
+- Linux: `~/.config/Code/User/settings.json`
 
 ```json
 {
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Cascadia Mono NF', monospace",
   "editor.fontSize": 14,
-  "editor.fontLigatures": true,
-  "workbench.colorTheme": "Dracula",
-  "workbench.fontAliasing": "antialiased"
+  "workbench.colorTheme": "Dracula"
 }
 ```
 
@@ -156,7 +157,6 @@ pane_frames {
 ```json
 {
   "theme": "dracula",
-  "accentColor": "#bd93f9",
   "textFont": "JetBrainsMono Nerd Font",
   "textFontSize": 14,
   "interfaceFont": "JetBrainsMono Nerd Font",
