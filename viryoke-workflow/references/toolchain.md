@@ -65,7 +65,7 @@ sudo apt-get install -y build-essential curl file git procps zsh
 | `brew install` (macOS) | 否 | Homebrew 运行在用户目录下 |
 | `apt install` (Linux) | 是 | 系统包管理器 |
 | `cargo install` (Linux) | 否 | Rust 工具链在用户目录 |
-| macOS `.pkg` cask | 是 | temurin、cc-switch 等需管理员权限 |
+| macOS `.pkg` cask | 是 | temurin 等需管理员权限 |
 
 ---
 
@@ -173,7 +173,6 @@ fi
 | 工具 | macOS 安装 | Linux 安装 | 用途 |
 |------|-----------|-----------|------|
 | **im-select** | `brew tap daipeihust/tap && brew install im-select` | 不需要 | 获取/设置当前输入法 |
-| **cc-switch** | `brew install --cask cc-switch`（.pkg，手动安装） | 不需要 | 输入法切换守护进程 |
 
 Linux 下 Neovim 配置 `fcitx5-remote` 切换中英文：
 
@@ -651,7 +650,7 @@ brew install --cask font-jetbrains-mono-nerd-font font-cascadia-mono-nf
 # === 输入法 ===
 brew install --cask squirrel-app
 brew tap daipeihust/tap && brew install im-select
-# brew install --cask cc-switch    # .pkg cask，手动安装
+
 
 # === 编辑器 ===
 brew install neovim
@@ -835,7 +834,7 @@ ollama pull qwen3:latest
 | 包管理器 | Homebrew | apt (系统包) + cargo (Rust CLI) + curl (脚本安装) + snap (GUI) |
 | 终端 | Ghostty.app (cask) | Ghostty (deb/AppImage) |
 | 中文输入法 | Squirrel (Rime) | fcitx5-rime (apt) |
-| 输入法切换 | im-select + cc-switch | fcitx5-remote |
+| 输入法切换 | im-select | fcitx5-remote |
 | 剪贴板 | 内置 pbcopy/pbpaste | xclip / wl-clipboard (apt) |
 | 字体注册 | 系统级安装 (cask) | 手动 → `~/.local/share/fonts/` → `fc-cache -fv` |
 | 容器运行时 | Colima (Lima VM) | Docker Engine 原生 (apt) |

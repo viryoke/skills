@@ -53,14 +53,11 @@ fc-cache -fv
 ```bash
 brew install --cask squirrel-app
 brew tap daipeihust/tap && brew install im-select
-# brew install --cask cc-switch  # .pkg cask，提示用户手动安装
 
 brew install neovim
 brew install --cask visual-studio-code
 code --install-extension dracula-theme.theme-dracula
 ```
-
-> **手动提示：** `cc-switch` 是 `.pkg` cask，需输入密码。阶段末提示用户手动执行。
 
 ### Linux
 

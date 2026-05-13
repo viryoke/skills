@@ -90,12 +90,12 @@ JetBrainsMono Nerd Font：macOS 用 brew cask，Linux 下载到 `~/.local/share/
 
 | 平台 | 输入法 | 剪贴板 |
 |------|--------|--------|
-| macOS | Squirrel + im-select + cc-switch | 系统内置 pbcopy/pbpaste |
+| macOS | Squirrel + im-select | 系统内置 pbcopy/pbpaste |
 | Linux | fcitx5 + fcitx5-rime (apt) | xclip (X11) 或 wl-clipboard (Wayland) |
 
 编辑器：Neovim + VS Code。macOS 用 brew，Linux 用 apt/snap。
 
-**需手动执行 (macOS)：** `brew install --cask cc-switch` 涉及 `.pkg` 安装，需输入密码
+**需手动执行：** 无
 
 ---
 
@@ -192,7 +192,7 @@ Obsidian、marksman、pandoc。macOS 用 brew，Linux 用 snap/cargo/apt。
 | 类型 | 示例 | sudo |
 |------|------|------|
 | `.app` cask | ghostty, visual-studio-code | 否 |
-| `.pkg` cask | temurin, cc-switch | 是 |
+| `.pkg` cask | temurin | 是 |
 | 字体 cask | font-jetbrains-mono-nerd-font | 否 |
 
 ## 错误处理
