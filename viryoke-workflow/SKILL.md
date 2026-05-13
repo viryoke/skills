@@ -5,7 +5,7 @@ description: |
   
   **触发场景：**
   - 用户提到"初始化环境"、"搭建开发环境"、"setup workflow"、"新机器配置"、"装工具"
-  - 用户要求按 TOOLCHAIN.md 配置工具链
+  - 用户要求按 toolchain.md 配置工具链
   
   **覆盖平台：** macOS / Linux / WSL2
   
@@ -50,11 +50,11 @@ description: |
 
 | 文档 | 用途 |
 |------|------|
-| `references/TOOLCHAIN.md` | 工具选型定义（权威参考） |
+| `references/toolchain.md` | 工具选型定义（权威参考） |
 | `references/scripts.md` | 详细安装命令 |
 | `references/configs.md` | 配置文件内容 |
 
-执行时查阅 TOOLCHAIN.md，不要凭记忆执行。
+执行时查阅 toolchain.md，不要凭记忆执行。
 
 ---
 
@@ -272,7 +272,7 @@ grep -qi microsoft /proc/version 2>/dev/null && echo "WSL2"
 
 ```
 references/
-├── TOOLCHAIN.md    # 工具选型定义（权威参考）
+├── toolchain.md    # 工具选型定义（权威参考）
 ├── scripts.md      # 详细安装命令
 └── configs.md      # 配置文件内容
 ```

@@ -182,4 +182,4 @@ theme = "dracula"
 - bottom: `~/.config/bottom/bottom.toml`
 - gh-dash: `~/.config/gh-dash/config.yml`
 
-具体配色参数参考 Dracula 官方文档或 TOOLCHAIN.md §2.2。
+具体配色参数参考 Dracula 官方文档或 toolchain.md §2.2。
