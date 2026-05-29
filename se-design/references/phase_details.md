@@ -33,7 +33,7 @@
 
 ### Step 3.2: 系统上下文建模
 
-使用 ASCII 字符图生成系统上下文图（参考 `references/diagram_guide.md` 中 ASCII 部分）：
+**终端展示**：使用 ASCII 字符图向用户展示系统上下文（参考 `references/diagram_guide.md` 中 ASCII 部分）：
 
 ```
 ┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
@@ -48,6 +48,8 @@
                      │  (ExtSysB)   │
                      └──────────────┘
 ```
+
+**写入 .md 文件**：将上图转为 PlantUML Component 代码块写入 `output/requirement_analysis_spec_[IR编号].md`，格式参考 `assets/requirement_analysis_spec.md` 模板「2. 系统上下文」章节。
 
 ### Step 3.3: IR→SR 分解
 
@@ -74,11 +76,15 @@
 
 ### Step 3.4: 需求追踪矩阵生成
 
-使用 ASCII 字符图生成 IR→SR 追踪矩阵图（参考 `references/diagram_guide.md` 中 ASCII 部分）。
+**终端展示**：使用 ASCII 字符图向用户展示 IR→SR 追踪矩阵图（参考 `references/diagram_guide.md` 中 ASCII 追踪矩阵图示例）。
+
+**写入 .md 文件**：将追踪矩阵转为 GraphViz DOT 代码块写入 `output/requirement_analysis_spec_[IR编号].md`，格式参考 `assets/requirement_analysis_spec.md` 模板「5.3 IR→SR追踪矩阵」章节和 `references/diagram_guide.md` 中 GraphViz 追踪矩阵示例。
 
 ### Step 3.5: 功能性需求分析
 
-使用 ASCII 用例图表达功能需求场景（参考 `references/diagram_guide.md` 中 ASCII 用例图示例）。
+**终端展示**：使用 ASCII 用例图向用户展示功能需求场景（参考 `references/diagram_guide.md` 中 ASCII 用例图示例）。
+
+**写入 .md 文件**：将用例图转为 PlantUML UseCase 代码块写入 `output/requirement_analysis_spec_[IR编号].md`，格式参考 `assets/requirement_analysis_spec.md` 模板「4.2 用例分析」章节。
 
 ### Step 3.6: DFX 非功能性需求分析
 
@@ -103,6 +109,9 @@
 ### Step 3.7: 需求分析说明书生成
 
 基于 `assets/requirement_analysis_spec.md` 模版，填充所有章节，生成完整的《需求分析说明书》。
+
+> [!CAUTION]
+> **图表格式规则**：写入 .md 文件时，所有图表必须使用 PlantUML（```plantuml）或 GraphViz（```dot）代码块，格式与 `assets/requirement_analysis_spec.md` 模板一致。禁止将 ASCII 字符图写入 .md 文件。Phase 5 的 convert_docx.py 依赖代码块标识来渲染图表。
 
 ---
 
@@ -146,13 +155,16 @@
 
 **2.2 4+1 视图（按需选用）**
 
-| 视图 | 是否使用 | 图表类型 | 交互展示方式 |
-|------|---------|---------|-------------|
-| 场景视图 | [使用/跳过] | [Use Case/Flowchart] | [ASCII] |
-| 逻辑视图 | [使用/跳过] | [Class/ER] | [ASCII] |
-| 过程视图 | [使用/跳过] | [Sequence/Activity] | [ASCII] |
-| 开发视图 | [使用/跳过] | [Component/Package] | [ASCII] |
-| 物理视图 | [使用/跳过] | [Deployment] | [ASCII] |
+| 视图 | 是否使用 | 图表类型 | 终端展示方式 | .md 文件写入格式 |
+|------|---------|---------|-------------|-----------------|
+| 场景视图 | [使用/跳过] | [Use Case/Flowchart] | ASCII | PlantUML 代码块 |
+| 逻辑视图 | [使用/跳过] | [Class/ER] | ASCII | PlantUML 代码块 |
+| 过程视图 | [使用/跳过] | [Sequence/Activity] | ASCII | PlantUML 代码块 |
+| 开发视图 | [使用/跳过] | [Component/Package] | ASCII | PlantUML 代码块 |
+| 物理视图 | [使用/跳过] | [Deployment] | ASCII | PlantUML 代码块 |
+
+> [!CAUTION]
+> 终端交互展示用 ASCII 字符图（用户可读）；写入 `output/functional_design_spec_SR-[编号].md` 时，必须使用 PlantUML 代码块，格式与 `assets/functional_design_spec.md` 模板一致。
 
 **2.3 接口契约（设计级）**
 
@@ -180,24 +192,30 @@
 
 #### 4. 依赖关系
 
-[使用 ASCII 字符图展示依赖关系图]
+**终端展示**：使用 ASCII 字符图展示依赖关系图
+
+**写入 .md 文件**：使用 PlantUML Component 代码块，格式与 `assets/functional_design_spec.md` 模板一致
 ```
 
 ### Step 4.2: 4+1 视图选择指南
 
 4+1 视图不是必须全部使用，根据 SR 特征按需选择：
 
-| 视图 | 使用时机 | 交互展示 | 何时跳过 |
-|------|---------|---------|---------|
-| **场景视图** | 多角色交互的 SR | ASCII 用例图 | 单一角色、简单场景 |
-| **逻辑视图** | 涉及复杂业务实体关系的 SR | ASCII 类图 | 无新增实体 |
-| **过程视图** | 涉及异步/并发/多模块交互的 SR | ASCII 时序图 | 同步简单流程 |
-| **开发视图** | 涉及多模块协作、新增部件的 SR | ASCII 组件图 | 单模块内部修改 |
-| **物理视图** | 涉及多设备/多进程部署的 SR | ASCII 部署图 | 单设备单进程 |
+| 视图 | 使用时机 | 终端展示 | .md 文件写入 | 何时跳过 |
+|------|---------|---------|-------------|---------|
+| **场景视图** | 多角色交互的 SR | ASCII 用例图 | PlantUML 代码块 | 单一角色、简单场景 |
+| **逻辑视图** | 涉及复杂业务实体关系的 SR | ASCII 类图 | PlantUML 代码块 | 无新增实体 |
+| **过程视图** | 涉及异步/并发/多模块交互的 SR | ASCII 时序图 | PlantUML 代码块 | 同步简单流程 |
+| **开发视图** | 涉及多模块协作、新增部件的 SR | ASCII 组件图 | PlantUML 代码块 | 单模块内部修改 |
+| **物理视图** | 涉及多设备/多进程部署的 SR | ASCII 部署图 | PlantUML 代码块 | 单设备单进程 |
 
 ### Step 4.3: 全部 SR 设计完成后生成依赖关系总图
 
-所有 SR 方案设计完成后，使用 ASCII 字符图生成完整的 SR→AR 依赖关系总图（参考 `references/diagram_guide.md` 中 ASCII 部分）。
+所有 SR 方案设计完成后：
+
+**终端展示**：使用 ASCII 字符图生成完整的 SR→AR 依赖关系总图（参考 `references/diagram_guide.md` 中 ASCII 部分）。
+
+**写入 .md 文件**：将依赖关系总图转为 GraphViz DOT 代码块写入 `output/functional_design_spec_SR-[编号].md`，格式参考 `references/diagram_guide.md` 中 GraphViz SR→AR 依赖关系示例。
 
 ---
 

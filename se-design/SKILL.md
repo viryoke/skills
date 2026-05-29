@@ -226,12 +226,44 @@ Phase 4: SR→AR Design             │  Phase 5: Archiving
 
 ## 图形化表达规范
 
-采用**双阶段分层策略**：
+采用**双轨输出策略**：
 
-| 阶段 | 展示方式 | 优势 |
-|------|---------|------|
-| **交互阶段（Phase 1-4）** | ASCII 字符图 | 终端直读、零渲染依赖 |
-| **归档阶段（Phase 5）** | PlantUML + GraphViz | 专业级图表，PNG 嵌入 Docx |
+| 场景 | 展示方式 | 优势 | 适用时机 |
+|------|---------|------|---------|
+| **终端交互展示** | ASCII 字符图 | 终端直读、零渲染依赖 | Phase 1-4 中在终端向用户展示图表 |
+| **MD 文件写入** | PlantUML/GraphViz 代码块 | 模板对齐、Phase 5 可直接渲染 | Phase 3/4 生成 .md 交付物文件时 |
+| **归档渲染** | PNG 图片（由 convert_docx.py 渲染） | 专业级图表，嵌入 Docx | Phase 5 自动转换 |
+
+> [!CAUTION]
+> **终端展示 ≠ 文件写入。这是最常见的执行错误。**
+>
+> 在终端与用户交互时用 ASCII 字符图（可读性好）；
+> 但写入 `output/*.md` 交付物文件时，**必须使用 PlantUML `plantuml` 代码块或 GraphViz `dot` 代码块**，
+> 与 `assets/` 模板格式保持一致，确保 Phase 5 的 convert_docx.py 能正确解析并渲染为 PNG。
+>
+> **自检规则**：写入 .md 文件后，扫描文件内容，如果出现 `┌`、`─`、`│`、`└`、`──>`、`<──` 等 ASCII 绘图字符，说明格式错误，必须替换为 PlantUML/DOT 代码块。
+
+**转换示例**（同一张图，两种表达）：
+
+终端展示（ASCII）：
+```
+┌──────────┐     ┌──────────────┐     ┌──────────┐
+│ 终端用户  │────>│ 目标系统      │────>│ 外部系统A │
+└──────────┘     └──────────────┘     └──────────┘
+```
+
+写入 .md 文件（PlantUML）：
+````
+```plantuml
+@startuml SystemContext
+actor "终端用户" as User
+component "目标系统\n(TargetSystem)" as System <<system>>
+component "外部系统A\n(ExtSysA)" as ExtA <<external>>
+User --> System : 使用
+System --> ExtA : API调用
+@enduml
+```
+````
 
 **图表类型覆盖**：系统上下文、时序图、用例图、状态图、组件图、追踪矩阵、部署图、依赖关系图。
 
